@@ -1,24 +1,35 @@
-
-
-
-function func(input_digit,map,arr,asf) {
-	if(input_digit.length===0){
-		arr.push(asf);
-		return;
-	}
-	let digit = parseInt(input_digit.charAt(0));
-	let str = map[digit];
-	for(let i=0;i<str.length;i++){
-		func(ques.substring(1),map,arr,asf+str.charAt(i));
-	}
-}
-
-function letterCombinations(input_digit) {
+function letterCombinations(input) {
   //Complete the function
-	let map = ["0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"];
-	let arr = [];
-	func(input_digit,map,arr,"");
-	return arr;
+ 
+	let table={
+		"2": "abc",
+		"3": "def",
+		"4": "ghi",
+		"5": "jkl",
+		"6": "mno",
+		"7": "pqrs",
+		"8": "tuv",
+		"9": "wxyz"
+	}
+ 
+	let solution=[];
+ 
+	function solve(currentIndex, calculatedString){
+		if(input.length<= currentIndex){
+			solution.push(calculatedString);
+			return;
+		}
+ 
+		let currentChar = input[currentIndex];
+		for(let i=0;i< table[currentChar].length;i++){
+			solve(currentIndex +1, calculatedString + table[currentChar][i]);
+		}
+	}
+	solve(0, "");
+ 
+	return(solution);
+ 
+	
 }
-
-// module.exports = letterCombinations;
+ 
+module.exports = letterCombinations;
